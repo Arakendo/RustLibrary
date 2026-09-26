@@ -2,3 +2,7 @@
 	path = vendor/Servo
 	url = https://github.com/servo/servo.git
 	shallow = true
+[submodule "vendor/Lucide"]
+	path = vendor/Lucide
+	url = https://github.com/lucide-icons/lucide.git
+	shallow = true

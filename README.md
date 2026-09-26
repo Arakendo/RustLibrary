@@ -21,6 +21,15 @@ The initial checkout is shallow; deepen it explicitly if history is needed.
 Follow the pinned upstream build instructions for any additional dependencies.
 No Servo build or runtime validation has been performed for this addition.
 
+[Lucide](https://github.com/lucide-icons/lucide) is pinned at `vendor/Lucide`
+as upstream icon source for consumer evaluation. Adding it does not select a UI
+framework, create a RustLibrary icon crate, or integrate icons into RustEditor.
+Preserve upstream licenses and notices when using or adapting assets or packages.
+
+Fetch it with `git submodule update --init vendor/Lucide`. The checkout is
+shallow; deepen it explicitly if history is needed. No packages were installed,
+built or tested as part of this source addition.
+
 ## Documentation Scaffold
 
 The documentation fixture below is retained as a starting point. Its placeholders
