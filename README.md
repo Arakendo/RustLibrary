@@ -3,9 +3,11 @@
 A collection of focused, reusable Rust crates for other projects to consume.
 Inspired by the toolkit-first organization of the C# `ClassLibrary` project.
 
-This repository is in its initial setup stage. It currently contains documentation
-templates; no Rust crates have been implemented yet. The intended structure is a
-Cargo workspace with independently consumable crates.
+This repository is a Cargo workspace with independently consumable crates.
+Its first crate is [rustlibrary-ulid](crates/rustlibrary-ulid/README.md), used by
+RustEditor for resource and snapshot identities. Run `cargo test --workspace`,
+`cargo clippy --workspace --all-targets -- -D warnings` and
+`cargo fmt --all -- --check` here. Vendor source is not part of the workspace.
 
 ## Third-party source references
 
