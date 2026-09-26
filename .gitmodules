@@ -1,0 +1,4 @@
+[submodule "vendor/Servo"]
+	path = vendor/Servo
+	url = https://github.com/servo/servo.git
+	shallow = true

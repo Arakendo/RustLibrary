@@ -7,6 +7,20 @@ This repository is in its initial setup stage. It currently contains documentati
 templates; no Rust crates have been implemented yet. The intended structure is a
 Cargo workspace with independently consumable crates.
 
+## Third-party source references
+
+[Servo](https://github.com/servo/servo) is pinned as a Git submodule at
+`vendor/Servo` for evaluation by consumers such as RustEditor. It remains
+upstream-owned source, not a RustLibrary crate or a selected application engine.
+No wrapper, build integration or compatibility claim is introduced by adding it.
+Keep upstream notices and licensing intact; evaluate the selected dependency
+closure and target requirements before integrating it.
+
+Fetch the pinned source with `git submodule update --init vendor/Servo`.
+The initial checkout is shallow; deepen it explicitly if history is needed.
+Follow the pinned upstream build instructions for any additional dependencies.
+No Servo build or runtime validation has been performed for this addition.
+
 ## Documentation Scaffold
 
 The documentation fixture below is retained as a starting point. Its placeholders
