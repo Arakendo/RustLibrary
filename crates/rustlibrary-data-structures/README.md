@@ -15,6 +15,11 @@ This is a first slice, not a parity port of its entire data-structures library.
 Line breaks are CR, LF and CRLF (one break). Empty text has one line; a trailing
 break starts an empty final line. Other Unicode separators remain content.
 No normalization or newline conversion occurs. Typed edit failures preserve text.
+`line_utf16_to_byte` and `byte_to_line_utf16` map zero-based lines and UTF-16
+columns without flattening the document. Columns exclude terminators and may
+equal content length; the position between CR and LF is rejected. No clamping
+or normalization is performed. Tabs count as one unit; combining marks and bidi
+text retain logical order. The trailing empty line accepts column zero.
 Zero limits admit empty data only. Limits bound logical bytes/elements, not total
 heap use, retained clones or memory inside T. Rope allocation OOM is not recovered.
 Debug output omits content. Flattening with `to_text` allocates the whole text.
@@ -28,9 +33,11 @@ assert_eq!(before.to_text(), "hello");
 assert_eq!(text.utf16_to_byte(8).unwrap(), 10);
 ```
 
-Run workspace tests, Clippy and formatting from RustLibrary. Five contract tests
+Run workspace tests, Clippy and formatting from RustLibrary. Eight contract tests
 cover deterministic Vec/String models, multi-chunk Unicode edits, clone isolation,
-ownership/drop behavior, bounds, budgets and line/UTF-16 contracts. These are unit
+ownership/drop behavior, bounds, budgets and line/UTF-16 contracts. Position tests
+compare every representable position in multi-chunk text against an independent
+scanner, reject malformed positions, and check reindexing after edits. These are unit
 and integration evidence, not a completed architectural corpus campaign or a
 performance benchmark. Windows Rust 1.95 was exercised; other targets/MSRV were not.
 

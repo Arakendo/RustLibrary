@@ -77,6 +77,46 @@ impl TextRope {
         }
         Ok(self.rope.char_to_byte(index))
     }
+    /// Maps a zero-based line and UTF-16 column to a scalar-safe byte offset.
+    /// Columns exclude CR/LF terminators. No clamping or surrogate splitting.
+    pub fn line_utf16_to_byte(&self, line: usize, column: usize) -> Result<usize, E> {
+        let start = self.line_start_byte(line)?;
+        let end = self.line_content_end(line);
+        let start_utf16 = self.byte_to_utf16(start)?;
+        let width = self.byte_to_utf16(end)? - start_utf16;
+        if column > width {
+            return Err(E::OutOfBounds);
+        }
+        self.utf16_to_byte(start_utf16 + column)
+    }
+
+    /// Returns a zero-based line and UTF-16 column in logical stored order.
+    /// The byte between CR and LF is rejected: line/column has no such position.
+    pub fn byte_to_line_utf16(&self, byte: usize) -> Result<(usize, usize), E> {
+        let absolute = self.byte_to_utf16(byte)?;
+        let line = self.rope.byte_to_line(byte);
+        if byte > self.line_content_end(line) {
+            return Err(E::InvalidBoundary);
+        }
+        let start = self.byte_to_utf16(self.rope.line_to_byte(line))?;
+        Ok((line, absolute - start))
+    }
+
+    // Caller validates line first. Inspect at most two trailing characters;
+    // never flatten text or scan the document to find a line ending.
+    fn line_content_end(&self, line: usize) -> usize {
+        let slice = self.rope.line(line);
+        let mut chars = slice.len_chars();
+        let mut end = self.rope.line_to_byte(line) + slice.len_bytes();
+        if chars > 0 && slice.char(chars - 1) == '\n' {
+            chars -= 1;
+            end -= 1;
+        }
+        if chars > 0 && slice.char(chars - 1) == '\r' {
+            end -= 1;
+        }
+        end
+    }
     /// Range is zero-based UTF-8 bytes, end-exclusive, at scalar boundaries.
     /// Typed failures leave the rope unchanged. Allocator OOM is not recovered.
     pub fn replace(&mut self, range: Range<usize>, text: &str) -> Result<(), E> {
