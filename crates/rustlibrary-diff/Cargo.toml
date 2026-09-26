@@ -1,0 +1,10 @@
+[package]
+name = "rustlibrary-diff"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+description = "Bounded exact line comparison with source-preserving ranges"
+
+[lints.rust]
+unsafe_code = "forbid"

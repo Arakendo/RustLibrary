@@ -7,6 +7,8 @@ This repository is a Cargo workspace with independently consumable crates.
 Its first crate is [rustlibrary-ulid](crates/rustlibrary-ulid/README.md), used by
 RustEditor for identifiers. [rustlibrary-data-structures](crates/rustlibrary-data-structures/README.md)
 provides a bounded gap buffer and Unicode text rope.
+[rustlibrary-diff](crates/rustlibrary-diff/README.md) provides bounded exact line
+comparison for small inputs, with source-preserving ranges and explicit failures.
 [rustlibrary-text-codec](crates/rustlibrary-text-codec/README.md)
 provides strict bounded Unicode and legacy text conversion. Run `cargo test --workspace`,
 `cargo clippy --workspace --all-targets -- -D warnings` and

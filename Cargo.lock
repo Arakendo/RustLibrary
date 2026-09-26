@@ -86,6 +86,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "rustlibrary-diff"
+version = "0.1.0"
+
+[[package]]
 name = "rustlibrary-text-codec"
 version = "0.1.0"
 dependencies = [
