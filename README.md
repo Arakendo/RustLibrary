@@ -5,7 +5,9 @@ Inspired by the toolkit-first organization of the C# `ClassLibrary` project.
 
 This repository is a Cargo workspace with independently consumable crates.
 Its first crate is [rustlibrary-ulid](crates/rustlibrary-ulid/README.md), used by
-RustEditor for identifiers. [rustlibrary-text-codec](crates/rustlibrary-text-codec/README.md)
+RustEditor for identifiers. [rustlibrary-data-structures](crates/rustlibrary-data-structures/README.md)
+provides a bounded gap buffer and Unicode text rope.
+[rustlibrary-text-codec](crates/rustlibrary-text-codec/README.md)
 provides strict bounded Unicode and legacy text conversion. Run `cargo test --workspace`,
 `cargo clippy --workspace --all-targets -- -D warnings` and
 `cargo fmt --all -- --check` here. Vendor source is not part of the workspace.

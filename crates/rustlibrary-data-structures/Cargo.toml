@@ -1,0 +1,13 @@
+[package]
+name = "rustlibrary-data-structures"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+description = "Focused bounded data structures for reusable application contracts"
+
+[dependencies]
+ropey = { version = "1.6.1", default-features = false, features = ["cr_lines", "simd"] }
+
+[lints.rust]
+unsafe_code = "forbid"
