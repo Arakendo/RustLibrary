@@ -1,0 +1,14 @@
+[package]
+name = "rustlibrary-text-codec"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+description = "Strict bounded text encoding for Unicode and legacy files"
+
+[dependencies]
+encoding_rs = "=0.8.35"
+oem_cp = "2.1"
+
+[lints.rust]
+unsafe_code = "forbid"
