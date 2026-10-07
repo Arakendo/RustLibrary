@@ -47,6 +47,7 @@ jobs:
           mkdir -p target/corpus-evidence
           cargo "+$RUST_TOOLCHAIN" run -p rustlibrary-corpus-rust-editor --locked --quiet > target/corpus-evidence/observed.tsv
           cargo "+$RUST_TOOLCHAIN" run -p rustlibrary-corpus-rust-editor --bin native --locked --quiet > target/corpus-evidence/native.tsv
+          cargo "+$RUST_TOOLCHAIN" run -p rustlibrary-corpus-rust-editor --bin workloads --locked --quiet > target/corpus-evidence/workloads.tsv
           rustc "+$RUST_TOOLCHAIN" --version --verbose > target/corpus-evidence/toolchain.txt
           cargo "+$RUST_TOOLCHAIN" --version >> target/corpus-evidence/toolchain.txt
           git rev-parse HEAD > target/corpus-evidence/commit.txt

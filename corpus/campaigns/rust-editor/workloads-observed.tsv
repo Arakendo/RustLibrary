@@ -1,0 +1,3 @@
+campaign	profile	case_policy	initial_documents	operations	checked_states	retained_snapshots	rejected_operations	final_files	final_bytes	outcome
+rust-editor-workloads	standard	sensitive	256	512	518	5	256	320	11605	pass
+rust-editor-workloads	standard	ascii-insensitive	256	512	518	5	256	320	11605	pass

@@ -19,4 +19,4 @@ invent a schema before repeated campaigns require the same fields.
 
 ## Index
 
-- [RustEditor Campaign](rust-editor/README.md): editor-owned drafts and save conflicts composed with shared resource, rope, and diff crates.
+- [RustEditor Campaign](rust-editor/README.md): editor-owned drafts, native roundtrips, and model-checked document lifecycles composed with shared crates. Production integration is deferred.

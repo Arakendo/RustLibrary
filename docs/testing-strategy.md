@@ -63,7 +63,7 @@ Remote results exist only after the workflow has been pushed and run on GitHub.
 
 ## Evidence and fixtures
 
-A successful matrix job uploads its in-memory and native campaign TSV reports, verbose toolchain version, and
+A successful matrix job uploads its in-memory, native, and model-workload campaign TSV reports, verbose toolchain version, and
 checkout commit ID as a uniquely named artifact retained for 14 days. Unexpected
 campaign errors terminate the job. The CLI emits a success report only after all
 controls pass; a failed run is not reported as successful evidence.
@@ -84,3 +84,8 @@ Native adapter tests and the native corpus executable create isolated temporary
 workspaces and remove only their owned roots. Unix-specific link/socket/name tests
 and Windows junction tests run in their corresponding matrix jobs. The native
 campaign TSV is saved beside the in-memory report in each evidence artifact.
+
+The corpus workload CLI seeds 256 documents and applies 512 deterministic mixed
+operations per case policy. It verifies every live state and five retained captures
+against independently owned expected bytes/folders. Full runs are correctness
+evidence; no performance threshold or production-editor compatibility is implied.

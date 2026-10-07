@@ -117,9 +117,9 @@ multi-store identity or workspace registry contract.
 ## Disposition and next action
 
 The initial question is supported for this small in-memory workflow. Keep this
-campaign in workspace regression checks. Use it as a reference when integrating
-the real RustEditor, and add evidence when that integration exposes a concrete
-boundary gap. No production RustEditor changes were made.
+campaign in workspace regression checks and expand corpus-owned consumers.
+Production RustEditor integration is deferred at the owner's request: its current
+system remains separate. No production RustEditor changes were made.
 
 Reopen for API/identity/version changes, multiple-store sessions, encoding changes,
 filesystem persistence, or evidence of insufficient capacity.
@@ -155,3 +155,48 @@ rustlibrary-resource-store-fs API. No production RustEditor code is changed.
 The native extension's passing tests support this bounded caller-controlled
 workflow only; they do not prove concurrency-safe confinement, atomic filesystem
 publication, permission/attribute roundtripping, or crash durability.
+
+## Deterministic workload extension (2026-10-07)
+
+Governing record: [ADR-0001](../../../docs/adr/ADR-0001-resource-store.md).
+The question is whether the shared contracts continue to compose across longer
+mixed document lifecycles and retained preview captures, beyond the initial
+single-document scenario. All new implementation is corpus-owned.
+
+    cargo run -p rustlibrary-corpus-rust-editor --bin workloads --offline
+    cargo test -p rustlibrary-corpus-rust-editor --bin workloads --offline
+
+The standard workload seeds 256 Unicode/CRLF documents across eight folders,
+then executes 512 deterministic operations for each case policy. The operation
+cycle covers rope prefix edits and exact diff ranges, conditional saves and stale
+save rejection, moves, copies, delete/recreate, colliding bulk imports, protected
+subtree deletion, oversized writes, and explicit empty-directory creation.
+
+An independent model owns Vec payloads and folder-name sets. Every step compares
+the complete file/folder inventory, bytes, payload sizes, identity uniqueness,
+tracked identity/version lifecycle, and total byte accounting. Expected bytes
+come from independent string operations, not from reading results back from the
+store. IDs/versions are opaque values tracked from successful calls, with separate
+assertions for preservation, replacement, and advancement.
+
+Each policy retains five immutable captures together with the expected state at
+capture time. At completion all captures are compared against those historical
+models. Rejected operations also check generation preservation. There are 256
+expected rejections per policy and 518 full-state checks, including retained
+captures. No source content appears in the report.
+
+The three small-profile regression tests cover both policies, repeated-run
+determinism, and negative controls that deliberately corrupt expected bytes,
+identity, and accounting to prove the model checker rejects mismatches. The full
+standard workload runs separately as a CI CLI step in all four matrix jobs.
+
+workloads-observed.tsv is actual local Windows stdout captured 2026-10-07;
+workloads-toolchain.txt records the toolchain used. CI writes fresh workloads.tsv
+into its evidence artifact. These are observations, not goldens. No timing
+threshold, memory measurement, concurrency result, or production-scale performance
+claim is made. This is deterministic correctness evidence, not fuzzing or a
+benchmark. The fixture workloads do not reproduce the actual RustEditor's system.
+
+Current evidence supports the stated mixed-operation sequence for both policies.
+Continue corpus-only validation for further concrete ownership questions; actual
+production integration stays deferred.
