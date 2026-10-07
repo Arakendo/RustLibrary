@@ -79,6 +79,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "rustlibrary-corpus-rust-editor"
+version = "0.1.0"
+dependencies = [
+ "rustlibrary-data-structures",
+ "rustlibrary-diff",
+ "rustlibrary-resource-store",
+]
+
+[[package]]
 name = "rustlibrary-data-structures"
 version = "0.1.0"
 dependencies = [

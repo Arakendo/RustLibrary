@@ -1,4 +1,4 @@
-# {{PROJECT_NAME}} Architectural Corpus
+# RustLibrary Architectural Corpus
 
 The `corpus/` directory contains executable evidence used to investigate and
 regress architectural claims. It is deliberately separate from examples,
@@ -15,7 +15,7 @@ contract.
 
 A useful corpus campaign asks:
 
-> Can {{PROJECT_NAME}} express this behavior naturally through the intended
+> Can RustLibrary express this behavior naturally through the intended
 > ownership and dependency boundaries?
 
 ## Initial Shape
@@ -101,3 +101,7 @@ Once accepted, a corpus campaign becomes a regression artifact. Refactors
 should preserve its primary claim unless an AR or ADR deliberately changes that
 claim. Put automated assertions at the narrowest honest boundary and retain
 machine-specific observations with explicit provenance.
+
+## Active Evidence Index
+
+- [RustEditor Campaign](campaigns/rust-editor/README.md): executable editor workflow through public RustLibrary APIs.

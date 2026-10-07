@@ -1,0 +1,15 @@
+[package]
+name = "rustlibrary-corpus-rust-editor"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+description = "Executable RustEditor-style consumer evidence for shared RustLibrary contracts"
+
+[dependencies]
+rustlibrary-resource-store = { path = "../../../crates/rustlibrary-resource-store" }
+rustlibrary-data-structures = { path = "../../../crates/rustlibrary-data-structures" }
+rustlibrary-diff = { path = "../../../crates/rustlibrary-diff" }
+
+[lints.rust]
+unsafe_code = "forbid"

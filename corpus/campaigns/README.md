@@ -19,4 +19,4 @@ invent a schema before repeated campaigns require the same fields.
 
 ## Index
 
-- No campaigns recorded.
+- [RustEditor Campaign](rust-editor/README.md): editor-owned drafts and save conflicts composed with shared resource, rope, and diff crates.

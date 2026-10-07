@@ -57,3 +57,7 @@ RustEditor's resource identity/version/snapshot implementation, and Tokimu's
 resource-space address/limit/content contracts and MemoryStore comparison note.
 The comparison note predates C#'s explicit folder support, so current C# source took
 precedence for hierarchy behavior. No source files were copied from those projects.
+
+The [RustEditor corpus campaign](../../corpus/campaigns/rust-editor/README.md)
+adds executable consumer evidence for editor-owned drafts, comparison, snapshots,
+and explicit save-conflict handling through public RustLibrary APIs.
