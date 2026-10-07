@@ -125,7 +125,10 @@ bounded retention, immutable data, stable local IDs, and stale-write detection.
 This is not C# API or behavioral parity: C#'s arbitrary URI handling and always
 case-insensitive overwrite policy are deliberately not adopted.
 
-JSON/XML parsing, MIME inference, hashing, archive/native import/export, persistence,
+The separate [native adapter](../rustlibrary-resource-store-fs/README.md) provides
+bounded directory import and new-directory snapshot export.
+
+JSON/XML parsing, MIME inference, hashing, archive import/export, persistence,
 watchers, provider mounts, and editor undo/save state remain separate concerns.
 Consumers can parse or hash returned bytes without duplicating store semantics.
 No public storage-backend abstraction is frozen before a second implementation

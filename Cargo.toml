@@ -1,3 +1,3 @@
 [workspace]
-members = ["crates/rustlibrary-ulid", "crates/rustlibrary-text-codec", "crates/rustlibrary-data-structures", "crates/rustlibrary-diff", "crates/rustlibrary-resource-store", "corpus/campaigns/rust-editor"]
+members = ["crates/rustlibrary-ulid", "crates/rustlibrary-text-codec", "crates/rustlibrary-data-structures", "crates/rustlibrary-diff", "crates/rustlibrary-resource-store", "crates/rustlibrary-resource-store-fs", "corpus/campaigns/rust-editor"]
 resolver = "3"

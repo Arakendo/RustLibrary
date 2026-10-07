@@ -85,6 +85,7 @@ dependencies = [
  "rustlibrary-data-structures",
  "rustlibrary-diff",
  "rustlibrary-resource-store",
+ "rustlibrary-resource-store-fs",
 ]
 
 [[package]]
@@ -101,6 +102,13 @@ version = "0.1.0"
 [[package]]
 name = "rustlibrary-resource-store"
 version = "0.1.0"
+
+[[package]]
+name = "rustlibrary-resource-store-fs"
+version = "0.1.0"
+dependencies = [
+ "rustlibrary-resource-store",
+]
 
 [[package]]
 name = "rustlibrary-text-codec"

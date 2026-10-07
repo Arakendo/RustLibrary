@@ -1,0 +1,7 @@
+campaign	control	outcome
+rust-editor-native	import-source-and-empty-folder	pass
+rust-editor-native	draft-save-leaves-source-on-disk-unchanged	pass
+rust-editor-native	export-captured-output	pass
+rust-editor-native	reopen-captured-text	pass
+rust-editor-native	reject-output-overwrite	pass
+rust-editor-native	cleanup-owned-temporary-workspace	pass

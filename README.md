@@ -18,6 +18,8 @@ provides strict bounded Unicode and legacy text conversion. Run `cargo test --wo
 bounded in-memory byte and text resources, explicit folders, inherited attributes,
 stable local IDs, version-checked writes, atomic tree operations, and immutable
 snapshots. See its document-bundle example for a complete consumer workflow.
+[rustlibrary-resource-store-fs](crates/rustlibrary-resource-store-fs/README.md)
+adds bounded native directory import and snapshot export to a new destination.
 The [RustEditor corpus campaign](corpus/campaigns/rust-editor/README.md) exercises
 editor drafts, comparison, saves, and conflicts through the shared crates and runs
 with workspace tests.

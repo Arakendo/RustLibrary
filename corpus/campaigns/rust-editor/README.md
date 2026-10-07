@@ -129,3 +129,29 @@ filesystem persistence, or evidence of insufficient capacity.
 Actual RustEditor integration, UI fidelity, undo/redo, automatic merge, background
 save races, native filesystem safety, production performance, and cross-platform
 runtime certification. A save here commits to the in-memory store, not disk.
+
+## Native adapter extension (2026-10-07)
+
+Governing record: [ADR-0002](../../../docs/adr/ADR-0002-native-resource-adapter.md).
+This extension asks whether the same editor-owned draft can compose the native
+adapter without moving host paths or export failure policy into the resource core.
+
+    cargo run -p rustlibrary-corpus-rust-editor --bin native --offline
+    cargo test -p rustlibrary-corpus-rust-editor --bin native --offline
+
+Unlike the original in-memory CLI, this executable creates an exclusively owned
+temporary workspace. It writes a source fixture, imports it, edits through TextRope,
+conditionally saves in memory, exports a captured snapshot, and reopens the output.
+It also proves source disk bytes remain unchanged, empty folders survive export,
+an existing output is rejected, and its temporary workspace is removed.
+
+Six controls emit native TSV only after all checks and explicit cleanup succeed.
+The checked-in native-observed.tsv is actual Windows CLI stdout captured on
+2026-10-07 using the versions in native-toolchain.txt. It is point-in-time evidence,
+not a golden. CI captures fresh native.tsv in every matrix artifact.
+
+src/bin/native.rs owns this orchestration and imports the public
+rustlibrary-resource-store-fs API. No production RustEditor code is changed.
+The native extension's passing tests support this bounded caller-controlled
+workflow only; they do not prove concurrency-safe confinement, atomic filesystem
+publication, permission/attribute roundtripping, or crash durability.

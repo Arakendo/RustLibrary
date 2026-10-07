@@ -1,0 +1,13 @@
+[package]
+name = "rustlibrary-resource-store-fs"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+description = "Bounded native directory import and new-directory export for resource stores"
+
+[dependencies]
+rustlibrary-resource-store = { path = "../rustlibrary-resource-store" }
+
+[lints.rust]
+unsafe_code = "forbid"

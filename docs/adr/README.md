@@ -17,3 +17,5 @@ and add it to the index. Never reuse a retired number.
 ## Index
 
 - [ADR-0001: Reusable in-memory resource store](ADR-0001-resource-store.md)
+
+- [ADR-0002: Native resource directory adapter](ADR-0002-native-resource-adapter.md)

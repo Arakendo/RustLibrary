@@ -63,7 +63,7 @@ Remote results exist only after the workflow has been pushed and run on GitHub.
 
 ## Evidence and fixtures
 
-A successful matrix job uploads its campaign TSV, verbose toolchain version, and
+A successful matrix job uploads its in-memory and native campaign TSV reports, verbose toolchain version, and
 checkout commit ID as a uniquely named artifact retained for 14 days. Unexpected
 campaign errors terminate the job. The CLI emits a success report only after all
 controls pass; a failed run is not reported as successful evidence.
@@ -76,6 +76,11 @@ oracle. Fixture changes must describe the intended public behavior they exercise
 ## Known gaps
 
 This workflow does not measure performance, test real RustEditor integration,
-validate native filesystem adapters, test WASM/macOS, or publish registry packages.
+certify filesystem confinement under concurrent mutation, test WASM/macOS, or publish registry packages.
 Add a new test layer when a concrete consumer or failure mode requires it; do not
 treat a passing in-memory campaign as evidence for those untested boundaries.
+
+Native adapter tests and the native corpus executable create isolated temporary
+workspaces and remove only their owned roots. Unix-specific link/socket/name tests
+and Windows junction tests run in their corresponding matrix jobs. The native
+campaign TSV is saved beside the in-memory report in each evidence artifact.
