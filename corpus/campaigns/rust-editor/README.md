@@ -80,6 +80,9 @@ From the repository root:
     cargo clippy -p rustlibrary-corpus-rust-editor --all-targets --offline -- -D warnings
 
 The package is a workspace member, so cargo test --workspace includes it.
+The [workspace CI](../../../.github/workflows/rust.yml) also runs the CLI on
+Windows/Linux with stable Rust and Rust 1.85, capturing fresh reports and
+provenance as job artifacts without changing the committed observation.
 
 The CLI writes TSV with columns campaign, case_policy, control, outcome.
 Capture stdout if a new point-in-time observation is needed. Cargo diagnostics

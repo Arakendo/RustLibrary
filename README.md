@@ -22,6 +22,11 @@ The [RustEditor corpus campaign](corpus/campaigns/rust-editor/README.md) exercis
 editor drafts, comparison, saves, and conflicts through the shared crates and runs
 with workspace tests.
 
+[Continuous integration](.github/workflows/rust.yml) checks Windows/Linux with
+stable Rust and Rust 1.85, plus formatting, Clippy, and API documentation. Each
+successful test job retains a fresh RustEditor campaign report as an artifact.
+See the [testing strategy](docs/testing-strategy.md) for local commands and scope.
+
 ## Third-party source references
 
 [Servo](https://github.com/servo/servo) is pinned as a Git submodule at

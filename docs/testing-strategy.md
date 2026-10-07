@@ -1,93 +1,81 @@
-# {{PROJECT_NAME}} Testing Strategy
+# RustLibrary Testing Strategy
 
 | Field | Value |
 | --- | --- |
-| Status | Draft |
+| Status | Active for the current workspace |
 | Authority | Current testing policy |
-| Owner | Team or role |
-| Last reviewed | YYYY-MM-DD |
-| Review cadence | On material change |
+| Owner | RustLibrary maintainers |
+| Last reviewed | 2026-10-07 |
 
-## Purpose
+## Validation boundaries
 
-Define what the project validates, at which boundaries, and with what evidence.
-Connect validation layers to accepted
-[requirements](product/requirements/), [quality attributes](quality/), and
-[security constraints](security/).
+Crate unit tests cover internal failure boundaries such as counter exhaustion.
+External contract tests under each crate's tests directory exercise public
+behavior, including invalid inputs and failed-operation atomicity. Rustdoc examples
+must compile and run. Runnable examples must build as workspace targets.
 
-## Principles
+The [RustEditor campaign](../corpus/campaigns/rust-editor/README.md) is a separate
+consumer package. It supplies architectural evidence that public resource, rope,
+and diff APIs compose without moving editor state into reusable crates. Its
+orchestration tests and CLI controls remain distinct from crate-level tests.
 
-- Test at the narrowest boundary that honestly proves the behavior.
-- Test public meaning and contracts, not incidental implementation.
-- Treat failure behavior as part of the contract.
-- Keep nondeterminism and environmental assumptions visible.
+## Local checks
 
-## Validation Layers
+From the repository root:
 
-### Unit Tests
+    cargo test --workspace --all-targets --locked
+    cargo test --workspace --doc --locked
+    cargo clippy --workspace --all-targets --locked -- -D warnings
+    cargo fmt --all -- --check
+    cargo doc --workspace --no-deps --locked
+    cargo run -p rustlibrary-corpus-rust-editor --locked
 
-- Scope:
-- Location:
-- Command:
+Set RUSTDOCFLAGS to "-D warnings" to match CI's documentation check.
+Use --offline in addition when dependencies are already cached. A missing cache
+entry is an environment failure, not evidence that a crate is broken.
 
-### Integration Tests
+For minimum-version verification, add +1.85.0 immediately after cargo in the test
+and campaign commands. Stable Rust owns lint and formatting checks; old compiler
+lint behavior does not define current formatting or style policy.
 
-- Scope:
-- Location:
-- Command:
+## Continuous integration
 
-### End-To-End Or System Tests
+[The Rust workspace workflow](../.github/workflows/rust.yml) runs on pushes to main,
+pull requests, and manual dispatch.
 
-- Scope:
-- Location:
-- Command:
-
-### Contract, Compatibility, Or Corpus Tests
-
-- Scope:
-- Evidence:
-- Command:
-
-## Test Placement
-
-| Behavior | Narrowest honest layer | Notes |
+| Job | Environment | Checks |
 | --- | --- | --- |
-| Example behavior | Unit / integration / system | |
+| Tests | Windows and Ubuntu; stable and Rust 1.85.0 | All workspace targets, doctests, campaign executable |
+| Quality | Ubuntu; stable | Formatting, Clippy with denied warnings, API docs with denied warnings |
 
-## Fixtures, Golden Files, And Snapshots
+Dependencies use the committed Cargo.lock via --locked. The test matrix exercises
+the workspace's current minimum-version baseline; individual manifests continue to
+own their declared version requirements. A matrix entry is a test target, not a
+blanket support promise for all other platforms or target triples.
 
-State when these artifacts are appropriate, how they are reviewed, and how
-intentional updates are distinguished from regressions.
+Vendor submodules are not checked out or built. Official checkout and artifact
+actions are pinned to reviewed commit SHAs, with read-only repository permissions
+and no persisted checkout credentials. No secrets, publication, deployment, or
+automatic source changes are part of this workflow.
 
-## Execution Tiers
+The workflow defines checks but does not configure repository branch protection.
+Remote results exist only after the workflow has been pushed and run on GitHub.
 
-### Fast Local
+## Evidence and fixtures
 
-```text
-command
-```
+A successful matrix job uploads its campaign TSV, verbose toolchain version, and
+checkout commit ID as a uniquely named artifact retained for 14 days. Unexpected
+campaign errors terminate the job. The CLI emits a success report only after all
+controls pass; a failed run is not reported as successful evidence.
 
-### Full Validation
+Committed corpus observations are point-in-time records, not golden files.
+CI writes fresh evidence under target/corpus-evidence and does not rewrite the
+campaign's historical observed.tsv. Assertions in the executable are the regression
+oracle. Fixture changes must describe the intended public behavior they exercise.
 
-```text
-command
-```
+## Known gaps
 
-### Scheduled Or Target-Specific
-
-```text
-command
-```
-
-## Continuous Integration
-
-Describe required checks, supported environments, and release gates.
-
-## Known Gaps
-
-- Gap:
-
-## Admission Rule For New Test Infrastructure
-
-Require a concrete behavior or risk that existing test layers cannot validate
-clearly before adding a new framework, harness, or fixture system.
+This workflow does not measure performance, test real RustEditor integration,
+validate native filesystem adapters, test WASM/macOS, or publish registry packages.
+Add a new test layer when a concrete consumer or failure mode requires it; do not
+treat a passing in-memory campaign as evidence for those untested boundaries.
