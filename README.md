@@ -14,6 +14,11 @@ provides strict bounded Unicode and legacy text conversion. Run `cargo test --wo
 `cargo clippy --workspace --all-targets -- -D warnings` and
 `cargo fmt --all -- --check` here. Vendor source is not part of the workspace.
 
+[rustlibrary-resource-store](crates/rustlibrary-resource-store/README.md) provides
+bounded in-memory byte and text resources, explicit folders, inherited attributes,
+stable local IDs, version-checked writes, atomic tree operations, and immutable
+snapshots. See its document-bundle example for a complete consumer workflow.
+
 ## Third-party source references
 
 [Servo](https://github.com/servo/servo) is pinned as a Git submodule at

@@ -1,0 +1,10 @@
+[package]
+name = "rustlibrary-resource-store"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+description = "Bounded in-memory resources with hierarchy, immutable snapshots, and atomic mutations"
+
+[lints.rust]
+unsafe_code = "forbid"

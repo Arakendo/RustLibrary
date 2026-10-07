@@ -16,4 +16,4 @@ and add it to the index. Never reuse a retired number.
 
 ## Index
 
-- No decisions recorded.
+- [ADR-0001: Reusable in-memory resource store](ADR-0001-resource-store.md)
